@@ -18,7 +18,7 @@ https://github.com/user-attachments/assets/dca96f44-58fe-4dda-b58a-30802719c052
 ## 2. 핵심 목표
 
 * 다양한 포맷(PDF, DOCX, HWP)의 문서 업로드 및 OCR 텍스트 추출
-* JWT 기반 사용자 인증 및 역할(Role) 관리
+* 쿠키, 세션 기반 사용자 인증 및 역할(Role) 관리
 * 문서 자동 분류(카테고리) 및 LLM 기반 요약
 * Chroma 기반 벡터 검색 및 RAG 질의응답
 * 답변 출처(참조 문서/페이지) 표시
@@ -42,7 +42,7 @@ https://github.com/user-attachments/assets/dca96f44-58fe-4dda-b58a-30802719c052
 
 API 서버와 AI 처리 흐름을 담당합니다.
 
-* JWT 인증 및 권한(Role) 처리
+* 쿠키 인증 및 권한(Role) 처리
 * 문서 업로드 API 및 파이프라인 Job 관리
 * OCR을 통한 텍스트 추출 (PaddleOCR, docling, PyMuPDF 등)
 * 텍스트 청킹 및 임베딩 생성
@@ -177,14 +177,7 @@ frontend  ──▶  backend  ──▶  db (PostgreSQL)
 
 `app/db/models.py` 기준 주요 테이블은 다음과 같습니다.
 
-* `users`, `user_sessions` — 사용자 계정 및 세션
-* `role`, `user_role` — 역할(실무 담당자/결재권자/관리자) 매핑
-* `doc` — 업로드 문서(원문/요약/카테고리)
-* `job` — 파이프라인 작업 상태 및 진행 단계
-* `rag_query`, `rag_query_ref` — RAG 질의 이력 및 출처
-* `draft` — 요약 기반 초안 및 결재 상태
-* `notification` — 사용자 알림
-* `history` — 변경 이력 로그
+https://github.com/user-attachments/assets/dca96f44-58fe-4dda-b58a-30802719c052
 
 ---
 
