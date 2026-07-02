@@ -24,7 +24,7 @@ https://github.com/user-attachments/assets/dca96f44-58fe-4dda-b58a-30802719c052
 * 답변 출처(참조 문서/페이지) 표시
 * SSE 기반 파이프라인 진행률 실시간 알림
 * 초안(Draft) 작성 및 승인/반려 결재 워크플로우
-* 전체 서비스를 Docker Compose로 로컬에서 완전히 구동 (외부 API 의존 없는 로컬 LLM)
+* 모델 가중치는 최초 1회 HuggingFace Hub에서 받아오되, 추론 자체는 매 요청마다 외부 LLM API를 호출하지 않고 로컬 Ollama/GPU에서 처리
 
 ---
 
@@ -83,7 +83,7 @@ frontend  ──▶  backend  ──▶  db (PostgreSQL)
                   │      ──▶  ollama  ──▶  ollama-init (최초 1회, 커스텀 모델 생성)
 ```
 
-모든 서비스는 외부 클라우드 API 없이 로컬 환경(Docker)에서 완결됩니다.
+추론 요청 자체는 외부 클라우드 LLM API 호출 없이 로컬 환경(Docker) 안에서 완결됩니다. 다만 ollama(Modelfile의 FROM hf.co/gyduddl/...)와 backend의 BGE-M3 임베딩 모델(AutoModel.from_pretrained)은 최초 1회 HuggingFace Hub에서 가중치를 다운로드하며, 이후에는 각각 ollama_data, hf_cache 볼륨에 캐시되어 재사용됩니다.
 
 ---
 
@@ -346,7 +346,7 @@ doc.user_id == current_user.user_id
 
 ## 17. 최종 목표
 
-이 프로젝트는 단순한 문서 뷰어가 아니라, 외부 클라우드 LLM API 없이 로컬 환경에서 완결되는 문서 요약·검색·결재 시스템 구현을 목표로 합니다.
+이 프로젝트는 단순한 문서 뷰어가 아니라, 매 요청마다 외부 클라우드 LLM API를 호출하지 않고 로컬 환경(Ollama)에서 추론이 완결되는 문서 요약·검색·결재 시스템 (모델 가중치 자체는 최초 1회 HuggingFace Hub에서 내려받습니다.)
 
 핵심은 다음과 같습니다.
 
