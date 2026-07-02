@@ -32,11 +32,11 @@ https://github.com/user-attachments/assets/dca96f44-58fe-4dda-b58a-30802719c052
 
 현재 프로젝트는 인프라(Docker Compose)를 기준으로 프론트엔드와 백엔드를 서브모듈로 분리하여 관리합니다.
 
-| Repository | Description | 비고 |
+| Repository | Description |
 | --- | --- | --- |
-| [Docker](https://github.com/brief-doc/docker) | Docker Compose 기반 통합 실행 환경 (본 저장소) | - |
-| [Backend](https://github.com/brief-doc/backend) | FastAPI 기반 API 서버, OCR/RAG 파이프라인 | submodule |
-| [Frontend](https://github.com/brief-doc/frontend) | React + Vite 기반 사용자 화면 UI | submodule |
+| [Docker](https://github.com/brief-doc/docker) | Docker Compose 기반 통합 실행 환경 (본 저장소) |
+| [Backend](https://github.com/brief-doc/backend) | FastAPI 기반 API 서버, OCR/RAG 파이프라인 |
+| [Frontend](https://github.com/brief-doc/frontend) | React + Vite 기반 사용자 화면 UI |
 
 ### Backend Repository
 
