@@ -1,7 +1,3 @@
-
-
-https://github.com/user-attachments/assets/dca96f44-58fe-4dda-b58a-30802719c052
-
 # 📄 BriefDoc — 로컬 AI 기반 문서 요약·분류 RAG 서비스
 
 ## 1. 프로젝트 소개
@@ -15,9 +11,7 @@ https://github.com/user-attachments/assets/dca96f44-58fe-4dda-b58a-30802719c052
 
 
 ## 시연영상
-
-
-
+https://github.com/user-attachments/assets/dca96f44-58fe-4dda-b58a-30802719c052
 
 ---
 
