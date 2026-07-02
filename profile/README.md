@@ -98,7 +98,7 @@ frontend  ──▶  backend  ──▶  db (PostgreSQL)
 ### Backend
 
 * Python, FastAPI, SQLAlchemy
-* cookie Authentication (python-jose, passlib)
+* Passlib (sha256_crypt 해싱), Secrets (암호학적 난수 생성)
 * Docker
 
 ### Database / Storage
@@ -321,7 +321,7 @@ doc.user_id == current_user.user_id
 주요 보안 기준은 다음과 같습니다.
 
 * 모든 문서 업로드·조회·RAG 질의 요청은 쿠키 인증 후 처리
-* 비밀번호는 해시(passlib)로 저장, 쿠키는 python-jose로 서명
+* 비밀번호는 해시(passlib)로 저장, 쿠키는 secrets를 사용해 난수화 후 서버측 기반의 DB 세션 토큰(Session Token) 방식으로 관리
 * 문서 조회/수정/삭제 시 소유자(user_id) 검증
 * 역할(Role) 기반 결재(승인/반려) 권한 분리
 * `.env` 파일 Git 업로드 금지
@@ -333,7 +333,8 @@ doc.user_id == current_user.user_id
 
 본 프로젝트의 완성 기준은 다음과 같습니다.
 
-* 사용자가 로그인/회원가입할 수 있다.
+* 관리자가 로그인 후 사용자 계정을 생성 할 수 있다.
+* 사용자가 로그인 할 수 있다.
 * 다양한 포맷의 문서를 업로드하고 OCR로 원문을 추출할 수 있다.
 * 문서가 자동으로 분류되고 LLM 기반 요약이 생성된다.
 * 파이프라인 진행 상태가 실시간(SSE)으로 표시된다.
