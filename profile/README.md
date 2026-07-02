@@ -121,7 +121,7 @@ frontend  ──▶  backend  ──▶  db (PostgreSQL)
 사용자가 문서를 업로드하면 다음 흐름으로 처리됩니다. (`document_pipeline_router.py`, `document_pipeline_service.py`)
 
 ```text
-1. 사용자 로그인 / JWT 인증
+1. 사용자 로그인 / 쿠키 인증
 2. 파일 업로드 → 임시 저장(pdf_files/) 후 Job 레코드 생성
 3. 202 Accepted 즉시 응답 (파이프라인은 백그라운드 asyncio Task로 실행)
 4. [OCR] 원문 텍스트 추출
@@ -141,7 +141,7 @@ frontend  ──▶  backend  ──▶  db (PostgreSQL)
 
 ```text
 1. 사용자 질문 입력
-2. JWT 인증
+2. 쿠키 인증
 3. Retriever를 통해 Chroma 벡터DB에서 관련 청크 검색 (Top-K)
 4. 검색된 문서(doc_name, category, page, snippet)를 컨텍스트로 조립
 5. RAG_PROMPT 기반 프롬프트 구성 후 Ollama LLM 호출
@@ -292,7 +292,7 @@ EMBEDDING_MODEL=
 SUMMARY_NUM_PREDICT=
 ```
 
-`backend/.env` 파일 (JWT 서명용):
+`backend/.env` 파일 :
 
 ```env
 SECRET_KEY=
@@ -308,7 +308,7 @@ SECRET_KEY=
 
 ```text
 1. 사용자 삭제 요청
-2. JWT 인증
+2. 쿠키 인증
 3. 문서 소유자(user_id) 확인
 4. doc 테이블의 is_deleted 플래그 처리 (Soft Delete)
 5. 목록/상세 조회 API에서 삭제된 문서 자동 제외
@@ -328,8 +328,8 @@ doc.user_id == current_user.user_id
 
 주요 보안 기준은 다음과 같습니다.
 
-* 모든 문서 업로드·조회·RAG 질의 요청은 JWT 인증 후 처리
-* 비밀번호는 해시(passlib)로 저장, JWT는 python-jose로 서명
+* 모든 문서 업로드·조회·RAG 질의 요청은 쿠키 인증 후 처리
+* 비밀번호는 해시(passlib)로 저장, 쿠키는 python-jose로 서명
 * 문서 조회/수정/삭제 시 소유자(user_id) 검증
 * 역할(Role) 기반 결재(승인/반려) 권한 분리
 * `.env` 파일 Git 업로드 금지
