@@ -98,7 +98,7 @@ frontend  ──▶  backend  ──▶  db (PostgreSQL)
 ### Backend
 
 * Python, FastAPI, SQLAlchemy
-* JWT Authentication (python-jose, passlib)
+* cookie Authentication (python-jose, passlib)
 * Docker
 
 ### Database / Storage
