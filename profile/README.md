@@ -176,8 +176,8 @@ frontend  ──▶  backend  ──▶  db (PostgreSQL)
 ## 9. 주요 테이블 (ERD 요약)
 
 `app/db/models.py` 기준 주요 테이블은 다음과 같습니다.
+<img width="1262" height="577" alt="ERD_trimmed" src="https://github.com/user-attachments/assets/1a95a758-ac4f-4c3f-92ac-c47410a5c34e" />
 
-https://github.com/user-attachments/assets/dca96f44-58fe-4dda-b58a-30802719c052
 
 ---
 
